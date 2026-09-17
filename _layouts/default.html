@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 rx=%223%22 fill=%22%231a1b26%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%239ece6a%22 font-family=%22monospace%22>&gt;_</text></svg>">
+
+  {% feed_meta %}
+  {% seo %}
+</head>
+<body>
+  <div class="term">
+    <div class="term-chrome">
+      <div class="term-dots"><span></span><span></span><span></span></div>
+      <div class="term-title">{{ site.author.handle }}@{{ site.author.host }}: ~{{ page.url | default: "/" }}</div>
+    </div>
+
+    <div class="term-body">
+      <header class="site-head">
+        <p class="prompt">
+          <span class="user">{{ site.author.handle }}</span><span class="at">@</span><span class="host">{{ site.author.host }}</span><span class="sym">:</span><span class="path">~</span><span class="sym">$</span>
+          <span>whoami</span>
+        </p>
+        <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+        <p class="typewriter" data-typewriter="{{ site.tagline }}">{{ site.tagline }}</p>
+
+        <nav class="cmds">
+          <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>~</a>
+          <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>about</a>
+          <a href="{{ '/feed.xml' | relative_url }}">feed.xml</a>
+          <a href="https://github.com/mikefox2k" target="_blank" rel="noopener">github</a>
+        </nav>
+      </header>
+
+      <main>
+        {{ content }}
+      </main>
+
+      <footer class="term-foot">
+        <span>exit status 0</span>
+        <span>&copy; {{ site.time | date: '%Y' }} {{ site.author.handle }}</span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="{{ '/assets/js/terminal.js' | relative_url }}"></script>
+</body>
+</html>

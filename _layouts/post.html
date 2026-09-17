@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<p class="prompt">
+  <span class="user">{{ site.author.handle }}</span><span class="at">@</span><span class="host">{{ site.author.host }}</span><span class="sym">:</span><span class="path">~/posts</span><span class="sym">$</span>
+  <span>cat {{ page.slug }}.md</span>
+</p>
+
+<div class="frontmatter">
+  <div><span class="key">date:</span> <span class="val">{{ page.date | date: "%Y-%m-%d" }}</span></div>
+  {% if page.tags.size > 0 %}
+  <div><span class="key">tags:</span> <span class="val">[{{ page.tags | join: ", " }}]</span></div>
+  {% endif %}
+  <div><span class="key">read:</span> <span class="val">~{{ page.content | number_of_words | divided_by: 200 | at_least: 1 }} min</span></div>
+</div>
+
+<article class="post">
+  <h1>{{ page.title }}</h1>
+  {{ content }}
+</article>
+
+{% if page.tags.size > 0 %}
+<div class="post-tags">
+  {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+</div>
+{% endif %}
+
+<div class="post-nav">
+  <div>
+    {% if page.previous.url %}
+    <span class="label">&larr; vorher</span>
+    <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+    {% endif %}
+  </div>
+  <div style="text-align: right;">
+    {% if page.next.url %}
+    <span class="label">danach &rarr;</span>
+    <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
+    {% endif %}
+  </div>
+</div>
+
+<p class="eof"></p>

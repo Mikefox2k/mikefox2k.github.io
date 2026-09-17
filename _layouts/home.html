@@ -1,0 +1,44 @@
+---
+layout: default
+---
+
+<p class="prompt">
+  <span class="user">{{ site.author.handle }}</span><span class="at">@</span><span class="host">{{ site.author.host }}</span><span class="sym">:</span><span class="path">~</span><span class="sym">$</span>
+  <span>ls -la ~/posts</span>
+</p>
+
+{% assign posts = paginator.posts | default: site.posts %}
+
+<p class="listing-head">total {{ posts | size }}</p>
+
+<div class="entries">
+  {% for post in posts %}
+  <article class="entry">
+    <div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
+    <div class="size">{{ post.content | strip_html | number_of_words | divided_by: 200 | plus: 1 }}m</div>
+    <div class="name"><a href="{{ post.url | relative_url }}">{{ post.slug }}.md</a></div>
+    {% if post.excerpt %}
+    <div class="excerpt">{{ post.excerpt | strip_html | truncate: 130 }}</div>
+    {% endif %}
+    {% if post.tags.size > 0 %}
+    <div class="tags">
+      {% for tag in post.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </div>
+    {% endif %}
+  </article>
+  {% endfor %}
+</div>
+
+{% if paginator.total_pages > 1 %}
+<div class="pager">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}">&larr; newer</a>
+  {% else %}<span></span>{% endif %}
+  <span>page {{ paginator.page }} / {{ paginator.total_pages }}</span>
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}">older &rarr;</a>
+  {% else %}<span></span>{% endif %}
+</div>
+{% endif %}
+
+<p class="eof"></p>

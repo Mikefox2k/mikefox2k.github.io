@@ -1,0 +1,51 @@
+title: "~/dev/low-level"
+tagline: "a fullstack dev going down the stack"
+description: "A developer blog documenting the journey from web and full-stack development to C, Rust, systems programming, and memory management."
+url: "https://mikefox2k.de"
+baseurl: ""
+lang: "en"
+
+author:
+  name: "Mikey"
+  handle: "mikefox2k"
+  host: "ll"
+  bio: "Full-stack developer exploring low-level and systems programming."
+
+# Permalinks: /jahr/monat/slug/
+permalink: /:year/:month/:title/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+paginate: 8
+paginate_path: "/page/:num/"
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "mikefox2k"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
